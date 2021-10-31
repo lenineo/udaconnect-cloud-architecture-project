@@ -1,6 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-default_box = "generic/opensuse42"
+default_box = "opensuse/Leap-15.2.x86_64"
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -13,7 +13,8 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-
+  config.vm.synced_folder ".", "/vagrant"
+  config.vm.boot_timeout = 360000
   config.vm.define "master" do |master|
     master.vm.box = default_box
     master.vm.hostname = "master"
@@ -25,7 +26,9 @@ Vagrant.configure("2") do |config|
       master.vm.network "forwarded_port", guest: p, host: p, protocol: "tcp"
       end
     master.vm.provider "virtualbox" do |v|
-      v.memory = "3072"
+      v.memory = "4096"
+      v.cpus = 4
+#       v.customize ["modifyvm", :id, "--ioapic", "on"]
       v.name = "master"
       end
     master.vm.provision "shell", inline: <<-SHELL
