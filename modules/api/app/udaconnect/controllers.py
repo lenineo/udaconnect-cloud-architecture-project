@@ -33,7 +33,7 @@ class LocationResource(Resource):
 
     @responds(schema=LocationSchema)
     def get(self, location_id) -> Location:
-        location: Location = LocationService.retrieve(location_id)
+        location: Location = LocationService.get_location(location_id)
         return location
 
 
@@ -57,7 +57,7 @@ class PersonsResource(Resource):
 class PersonResource(Resource):
     @responds(schema=PersonSchema)
     def get(self, person_id) -> Person:
-        person: Person = PersonService.retrieve(person_id)
+        person: Person = PersonService.get_location(person_id)
         return person
 
 
