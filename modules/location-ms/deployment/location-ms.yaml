@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: location-ms
+  name: location-ms
+spec:
+  ports:
+  - name: "5000"
+    port: 5000
+    targetPort: 5000
+    nodePort: 30004
+  selector:
+    service: location-ms
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: location-ms
+  name: location-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: location-ms
+  template:
+    metadata:
+      labels:
+        service: location-ms
+    spec:
+      containers:
+      - image: lenineo/location-ms:latest
+        name: location-ms
+        imagePullPolicy: Always
+        env:
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: db-geolocations-env
+              key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_PASSWORD
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: db-geolocations-env
+              key: DB_NAME
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: db-geolocations-env
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: db-geolocations-env
+              key: DB_PORT
+      restartPolicy: Always

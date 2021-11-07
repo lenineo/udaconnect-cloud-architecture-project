@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: contact-ms
+  name: contact-ms
+spec:
+  ports:
+  - name: "5000"
+    port: 5000
+    targetPort: 5000
+    nodePort: 30005
+  selector:
+    service: contact-ms
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: contact-ms
+  name: contact-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: contact-ms
+  template:
+    metadata:
+      labels:
+        service: contact-ms
+    spec:
+      containers:
+      - image: lenineo/contact-ms:latest
+        name: contact-ms
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "64m"
+          limits:
+            memory: "256Mi"
+            cpu: "256m"
+        env:
+        - name: PERSON_MS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: connections-cm
+              key: PERSON_MS_URL
+        - name: LOCATION_MS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: contact-cm
+              key: LOCATION_MS_URL
+      restartPolicy: Always
+

@@ -1,10 +1,10 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: postgres-geolocations-volume
+  name: postgres-persons-volume
   labels:
     type: local
-    app: postgres_geolocations
+    app: postgres-persons
 spec:
   storageClassName: manual
   capacity:
@@ -12,14 +12,14 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/mnt/data/geolocations"
+    path: "/mnt/data/persons"
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: postgres-geolocations-pv-claim
+  name: postgres-persons-pv-claim
   labels:
-    app: postgres_geolocations
+    app: postgres-persons
 spec:
   storageClassName: manual
   accessModes:
@@ -31,29 +31,29 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres_geolocations
+  name: postgres-persons
   labels:
-    app: postgres_geolocations
+    app: postgres-persons
 spec:
   type: NodePort
   selector:
-    app: postgres
+    app: postgres-persons
   ports:
    - port: 5432
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres_geolocations
+  name: postgres-persons
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres_geolocations
+      app: postgres-persons
   template:
     metadata:
       labels:
-        app: postgres_geolocations
+        app: postgres-persons
     spec:
       containers:
         - name: postgres
@@ -65,7 +65,7 @@ spec:
           - name: POSTGRES_USER
             valueFrom:
               configMapKeyRef:
-                name: db-geolocations-env
+                name: db-persons-cm
                 key: DB_USERNAME
           - name: POSTGRES_PASSWORD
             valueFrom:
@@ -75,7 +75,7 @@ spec:
           - name: POSTGRES_DB
             valueFrom:
               configMapKeyRef:
-                name: db-geolocations-env
+                name: db-persons-cm
                 key: DB_NAME
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
@@ -83,4 +83,4 @@ spec:
       volumes:
         - name: postgresdb
           persistentVolumeClaim:
-            claimName: postgres-geolocations-pv-claim
+            claimName: postgres-persons-pv-claim

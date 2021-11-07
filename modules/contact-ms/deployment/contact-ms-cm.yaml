@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  PERSON_MS_URL: "http://person-ms:5000/api/persons"
+  LOCATION_MS_URL: "http://location-ms:5000/api/locations"
+metadata:
+  name: contact-cm
