@@ -9,7 +9,7 @@ spec:
     - name: "5000"
       port: 5000
       targetPort: 5000
-      nodePort: 30001
+      nodePort: 30006
   selector:
     service: location-saver-ms
   type: NodePort
@@ -31,24 +31,24 @@ spec:
         service: location-saver-ms
     spec:
       containers:
-        - image: lenineo/location-saver-ms:latest
+        - image: ulyanov/location-saver-ms:latest
           name: location-saver-ms
           imagePullPolicy: Always
           env:
             - name: KAFKA_SERVER
               valueFrom:
                 configMapKeyRef:
-                  name: kafka-configmap
+                  name: kafka-locationsv-cm
                   key: KAFKA_URL
             - name: KAFKA_TOPIC
               valueFrom:
                 configMapKeyRef:
-                  name: kafka-configmap
+                  name: kafka-locationsv-cm
                   key: KAFKA_TOPIC
             - name: DB_USERNAME
               valueFrom:
                 configMapKeyRef:
-                  name: db-env
+                  name: db-locsaver-env
                   key: DB_USERNAME
             - name: DB_PASSWORD
               valueFrom:
@@ -58,16 +58,16 @@ spec:
             - name: DB_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: db-env
+                  name: db-locsaver-env
                   key: DB_NAME
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: db-env
+                  name: db-locsaver-env
                   key: DB_HOST
             - name: DB_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: db-env
+                  name: db-locsaver-env
                   key: DB_PORT
       restartPolicy: Always

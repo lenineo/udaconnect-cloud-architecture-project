@@ -4,7 +4,7 @@ metadata:
   name: postgres-geolocations-volume
   labels:
     type: local
-    app: postgres_geolocations
+    app: postgres-geolocations
 spec:
   storageClassName: manual
   capacity:
@@ -19,7 +19,7 @@ apiVersion: v1
 metadata:
   name: postgres-geolocations-pv-claim
   labels:
-    app: postgres_geolocations
+    app: postgres-geolocations
 spec:
   storageClassName: manual
   accessModes:
@@ -31,32 +31,32 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres_geolocations
+  name: postgres-geolocations
   labels:
-    app: postgres_geolocations
+    app: postgres-geolocations
 spec:
   type: NodePort
   selector:
-    app: postgres
+    app: postgres-geolocations
   ports:
    - port: 5432
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres_geolocations
+  name: postgres-geolocations
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres_geolocations
+      app: postgres-geolocations
   template:
     metadata:
       labels:
-        app: postgres_geolocations
+        app: postgres-geolocations
     spec:
       containers:
-        - name: postgres
+        - name: postgres-geolocations-container
           image: postgis/postgis:12-2.5-alpine
           imagePullPolicy: "IfNotPresent"
           ports:
@@ -78,9 +78,9 @@ spec:
                 name: db-geolocations-env
                 key: DB_NAME
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgresdb
+            - mountPath: /var/lib/geolocationsdb/data
+              name: geolocations
       volumes:
-        - name: postgresdb
+        - name: geolocations
           persistentVolumeClaim:
             claimName: postgres-geolocations-pv-claim

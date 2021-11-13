@@ -30,7 +30,7 @@ spec:
         service: location-producer-ms
     spec:
       containers:
-      - image: lenineo/location-producer-ms:latest
+      - image: ulyanov/location-producer-ms:latest
         name: location-producer-ms
         imagePullPolicy: Always
         env:

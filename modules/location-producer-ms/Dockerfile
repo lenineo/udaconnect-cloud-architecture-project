@@ -1,12 +1,13 @@
 FROM python:3.7-alpine
 
-WORKDIR /app
-COPY . .
+WORKDIR .
 
-RUN apk add --no-cache gcc musl-dev linux-headers geos libc-dev postgresql-dev
-
+RUN apk add --no-cache gcc musl-dev linux-headers geos libc-dev postgresql-dev g++
+COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 EXPOSE 5005
+
+COPY . .
 
 ENTRYPOINT ["python", "app.py"]

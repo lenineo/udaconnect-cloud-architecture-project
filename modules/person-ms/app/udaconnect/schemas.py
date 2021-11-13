@@ -2,7 +2,7 @@ from geoalchemy2.types import Geometry as GeometryType
 from marshmallow import Schema, fields
 from marshmallow_sqlalchemy.convert import ModelConverter as BaseModelConverter
 
-from api.app.udaconnect.models import Person
+from app.udaconnect.models import Person
 
 
 class PersonSchema(Schema):

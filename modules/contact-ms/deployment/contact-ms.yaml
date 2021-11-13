@@ -31,7 +31,7 @@ spec:
         service: contact-ms
     spec:
       containers:
-      - image: lenineo/contact-ms:latest
+      - image: ulyanov/contact-ms:latest
         name: contact-ms
         imagePullPolicy: Always
         resources:
@@ -45,7 +45,7 @@ spec:
         - name: PERSON_MS_URL
           valueFrom:
             configMapKeyRef:
-              name: connections-cm
+              name: contact-cm
               key: PERSON_MS_URL
         - name: LOCATION_MS_URL
           valueFrom:

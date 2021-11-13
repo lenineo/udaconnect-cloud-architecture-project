@@ -19,7 +19,7 @@ DB_PORT = os.environ['DB_PORT']
 
 # Logging
 logging.basicConfig(level=logging.WARNING)
-logger = logging.getLogger("udaconnect-api")
+logger = logging.getLogger("location-saver-api")
 
 # Set up database connection
 engine = create_engine(SQLALCHEMY_DATABASE_URI, echo=True)

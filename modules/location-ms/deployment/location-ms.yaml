@@ -31,7 +31,7 @@ spec:
         service: location-ms
     spec:
       containers:
-      - image: lenineo/location-ms:latest
+      - image: ulyanov/location-ms:latest
         name: location-ms
         imagePullPolicy: Always
         env:

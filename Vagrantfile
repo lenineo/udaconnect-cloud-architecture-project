@@ -26,10 +26,10 @@ Vagrant.configure("2") do |config|
       master.vm.network "forwarded_port", guest: p, host: p, protocol: "tcp"
       end
     master.vm.provider "virtualbox" do |v|
-      v.memory = "4096"
+      v.memory = "6096"
       v.cpus = 4
 #       v.customize ["modifyvm", :id, "--ioapic", "on"]
-      v.name = "master"
+      v.name = "udaconnect"
       end
     master.vm.provision "shell", inline: <<-SHELL
       sudo zypper refresh

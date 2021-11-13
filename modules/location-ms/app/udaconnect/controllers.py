@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from app.locations.models import Location
-from app.locations.schemas import (
-    LocationSchema,
+from app.udaconnect.models import Location
+from app.udaconnect.schemas import (
+    LocationSchema
 )
 from app.udaconnect.services import LocationService
 from flask import request
@@ -30,7 +30,7 @@ class LocationResource(Resource):
 
     @responds(schema=LocationSchema)
     def get(self, location_id) -> Location:
-        location: Location = LocationService.get_location(location_id)
+        location: Location = LocationService.retrieve(location_id)
         return location
 
 

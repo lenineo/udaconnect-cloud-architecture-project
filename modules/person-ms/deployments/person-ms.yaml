@@ -31,7 +31,7 @@ spec:
         service: person-ms
     spec:
       containers:
-      - image: lenineo/person-ms:latest
+      - image: ulyanov/peron-ms:latest
         name: person-ms
         imagePullPolicy: Always
         env:

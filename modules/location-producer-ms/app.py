@@ -5,7 +5,9 @@ from concurrent import futures
 from kafka import KafkaProducer
 
 import grpc
-from app import location_pb2, location_pb2_grpc
+
+import location_pb2
+import location_pb2_grpc
 
 KAFKA_TOPIC = os.environ["KAFKA_TOPIC"]
 KAFKA_SERVER = os.environ["KAFKA_SERVER"]

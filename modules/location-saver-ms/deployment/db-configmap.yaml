@@ -1,11 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 data:
-  KAFKA_SERVER: localhost:9092
-  KAFKA_TOPIC: location
-  DB_USERNAME: ct_admin
-  DB_NAME: geolocations
-  DB_HOST: postgres_geolocations
-  DB_PORT: 5432
+  DB_USERNAME: "ct_admin"
+  DB_NAME: "geolocations"
+  DB_HOST: "postgres-geolocations"
+  DB_PORT: "5432"
 metadata:
-  name: db-geolocations-env
+  name: db-locsaver-env

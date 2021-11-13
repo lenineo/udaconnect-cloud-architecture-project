@@ -31,7 +31,7 @@ spec:
         service: udaconnect-app
     spec:
       containers:
-      - image: lenineo/udaconnect-app:latest
+      - image: ulyanov/udaconnect-app:latest
         name: udaconnect-app
         imagePullPolicy: Always
         resources:
