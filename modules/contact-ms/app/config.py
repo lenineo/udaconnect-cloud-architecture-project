@@ -1,6 +1,11 @@
 import os
 from typing import List, Type
 
+DB_USERNAME = ""
+DB_PASSWORD = ""
+DB_HOST = ""
+DB_PORT = ""
+DB_NAME = ""
 
 
 class BaseConfig:
@@ -18,7 +23,9 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     TESTING = False
-
+    SQLALCHEMY_DATABASE_URI = (
+        f"postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    )
 
 
 class TestingConfig(BaseConfig):
@@ -27,7 +34,9 @@ class TestingConfig(BaseConfig):
     DEBUG = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     TESTING = True
-
+    SQLALCHEMY_DATABASE_URI = (
+        f"postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    )
 
 
 class ProductionConfig(BaseConfig):
@@ -36,7 +45,9 @@ class ProductionConfig(BaseConfig):
     DEBUG = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     TESTING = False
-
+    SQLALCHEMY_DATABASE_URI = (
+        f"postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    )
 
 
 EXPORT_CONFIGS: List[Type[BaseConfig]] = [

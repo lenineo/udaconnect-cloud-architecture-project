@@ -34,16 +34,22 @@ class LocationResource(Resource):
         return location
 
 
-@api.route("/locations/")
+@api.route("/locations/persons/<person_id>")
 @api.param("person_id", "Unique ID for a given Person", _in="query")
-@api.param("start_date", "Lower bound of date range", _in="query")
-@api.param("end_date", "Upper bound of date range", _in="query")
+@api.param("start_date", "Lower bound of date range",  _in="query", required=True)
+@api.param("end_date", "Upper bound of date range",  _in="query", required=True)
 @api.param("distance", "Proximity to a given user in meters", _in="query")
 class LocationsResource(Resource):
     @responds(schema=LocationSchema, many=True)
     def get(self, person_id) -> List[Location]:
+        start_date: datetime = datetime.strptime(
+            request.args["start_date"], DATE_FORMAT
+        )
+        end_date: datetime = datetime.strptime(request.args["end_date"], DATE_FORMAT)
+        distance: Optional[int] = request.args.get("distance", 5)
+
         locations: List[Location] = LocationService.find_contacts_locations(person_id,
-             start_date=request.args["start_date"],
-             end_date=request.args["end_date"],
-             meters=request.args["distance"])
+             start_date=start_date,
+             end_date=end_date,
+             meters=distance)
         return locations

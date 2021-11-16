@@ -9,7 +9,7 @@ from geoalchemy2.functions import ST_AsText, ST_Point
 from sqlalchemy.sql import text
 
 logging.basicConfig(level=logging.WARNING)
-logger = logging.getLogger("udaconnect-api")
+logger = logging.getLogger("location-ms")
 
 
 class ConnectionService:
@@ -56,6 +56,7 @@ class ConnectionService:
         AND     TO_DATE(:end_date, 'YYYY-MM-DD') > creation_time;
         """
         )
+
         result: List[Connection] = []
         for line in tuple(data):
             for (
@@ -64,7 +65,7 @@ class ConnectionService:
                 exposed_lat,
                 exposed_long,
                 exposed_time,
-            ) in db.con.execute(query, **line):
+            ) in db.engine.execute(query, **line):
                 location = Location(
                     id=location_id,
                     person_id=exposed_person_id,

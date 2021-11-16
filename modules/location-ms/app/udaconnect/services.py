@@ -89,7 +89,7 @@ class LocationService:
                     exposed_lat,
                     exposed_long,
                     exposed_time,
-            ) in db.con.execute(query, **line):
+            ) in db.engine.execute(query, **line):
                 location = Location(
                     id=location_id,
                     person_id=exposed_person_id,
