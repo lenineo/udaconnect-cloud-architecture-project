@@ -54,7 +54,8 @@ class LocationService:
             location = Location()
             location.id = item["id"]
             location.person_id = item["person_id"]
-            location.coordinate = ST_Point(item["latitude"], item["longitude"])
+            location.latitude = item["latitude"]
+            location.longitude = item["longitude"]
             location.creation_time = datetime.strptime(item['creation_time'], "%Y-%m-%dT%H:%M:%S")
             locations.append(location)
 
