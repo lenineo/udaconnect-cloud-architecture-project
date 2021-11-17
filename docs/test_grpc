@@ -1,0 +1,6 @@
+To test grpc you need to get the pod name of location_producer_ms
+and run this command:
+
+  kubectl exec <PODNAME> -- python location_writer.py
+
+where PODNAME is the name of current location_producer_ms pod

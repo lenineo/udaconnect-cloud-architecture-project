@@ -20,9 +20,9 @@ class LocationServicer(location_pb2_grpc.LocationServiceServicer):
 
         request_value = {
             "person_id": int(request.person_id),
-            "latitude": float(request.latitude),
-            "longitude": float(request.longitude),
-            "creation_time": request.creation_time
+            "latitude": str(request.latitude),
+            "longitude": str(request.longitude),
+            "creation_time": str(request.creation_time)
         }
 
         json_data = json.dumps(request_value).encode('utf-8')

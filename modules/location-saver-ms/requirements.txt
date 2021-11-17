@@ -5,7 +5,7 @@ marshmallow-sqlalchemy==0.23.1
 packaging==21.0
 psycopg2-binary==2.8.5
 pyparsing==3.0.1
-shapely==1.7.0
+shapely==1.8.0
 six==1.16.0
 SQLAlchemy==1.4.26
 wheel==0.37.0
