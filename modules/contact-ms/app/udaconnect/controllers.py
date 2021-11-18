@@ -14,7 +14,7 @@ from typing import Optional, List
 
 DATE_FORMAT = "%Y-%m-%d"
 
-api = Namespace("UdaConnect", description="Connections via geolocation.")  # noqa
+api = Namespace("UdaConnect", description="Microservice to get contacts by person id and geolocation coordinates.")  # noqa
 
 
 # TODO: This needs better exception handling

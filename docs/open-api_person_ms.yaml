@@ -1,0 +1,51 @@
+openapi: 3.0.1
+info:
+  title: UdaConnect - Person-ms API
+  version: 0.1.0
+servers:
+- url: /
+tags:
+- name: UdaConnect
+  description: Microservice to get UdaConnect users inforamation.
+paths:
+  /api/persons:
+    get:
+      tags:
+      - UdaConnect
+      operationId: get_persons_resource
+      responses:
+        200:
+          description: Success
+          content: {}
+    post:
+      tags:
+      - UdaConnect
+      operationId: post_persons_resource
+      responses:
+        200:
+          description: Success
+          content: {}
+  /api/persons/{person_id}:
+    get:
+      tags:
+      - UdaConnect
+      operationId: get_person_resource
+      parameters:
+      - name: person_id
+        in: path
+        description: Unique ID for a given Person
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content: {}
+components:
+  responses:
+    MaskError:
+      description: When any error occurs on mask
+      content: {}
+    ParseError:
+      description: When a mask can't be parsed
+      content: {}

@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "ddf22964-3dcb-40c4-8b72-c4e1acd6d571",
+		"name": "udaconnect test post",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:30003/api/persons",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 188,\r\n    \"first_name\": \"Sergei\",\r\n    \"last_name\": \"Ulianov\",\r\n    \"company_name\": \"Metaverse\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:30003/api/persons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "30003",
+					"path": [
+						"api",
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:30004/api/locations",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"person_id\": 188,\r\n    \"creation_time\": \"2021-11-11T13:15\",\r\n    \"latitude\" : \"55.644466\",\r\n    \"longitude\": \"37.618423\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:30004/api/locations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "30004",
+					"path": [
+						"api",
+						"locations"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

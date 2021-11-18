@@ -12,15 +12,14 @@ from typing import Optional, List
 
 DATE_FORMAT = "%Y-%m-%d"
 
-api = Namespace("UdaConnect", description="Connections via geolocation.")  # noqa
+
+api = Namespace("UdaConnect", description="Location microservice - microservice to get geolocation data of UdaConnect project..")  # noqa
 
 
 # TODO: This needs better exception handling
 
 @api.route("/locations")
-@api.route("/locations/<location_id>")
-@api.param("location_id", "Unique ID for a given Location", _in="query")
-class LocationResource(Resource):
+class LocationPostResource(Resource):
     @accepts(schema=LocationSchema)
     @responds(schema=LocationSchema)
     def post(self) -> Location:
@@ -28,10 +27,14 @@ class LocationResource(Resource):
         location: Location = LocationService.create(request.get_json())
         return location
 
+@api.route("/locations/<location_id>")
+@api.param("location_id", "Unique ID for a given Location", _in="query")
+class LocationGetResource(Resource):
     @responds(schema=LocationSchema)
     def get(self, location_id) -> Location:
         location: Location = LocationService.retrieve(location_id)
         return location
+
 
 
 @api.route("/locations/persons/<person_id>")

@@ -1,0 +1,48 @@
+openapi: 3.0.1
+info:
+  title: UdaConnect - Contact-ms API
+  version: 0.1.0
+servers:
+- url: /
+tags:
+- name: UdaConnect
+  description: Microservice to get contacts by person id and geolocation coordinates.
+paths:
+  /api/persons/{person_id}/connection:
+    get:
+      tags:
+      - UdaConnect
+      operationId: get_connection_data_resource
+      parameters:
+      - name: distance
+        in: query
+        description: Proximity to a given user in meters
+        schema:
+          type: string
+      - name: end_date
+        in: query
+        description: Upper bound of date range
+        schema:
+          type: string
+      - name: start_date
+        in: query
+        description: Lower bound of date range
+        schema:
+          type: string
+      - name: person_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content: {}
+components:
+  responses:
+    MaskError:
+      description: When any error occurs on mask
+      content: {}
+    ParseError:
+      description: When a mask can't be parsed
+      content: {}

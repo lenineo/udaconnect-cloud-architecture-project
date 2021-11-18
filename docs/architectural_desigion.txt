@@ -1,0 +1,15 @@
+Udaconnect project was refactored based on microservice architectural principles and best practices of 12  factored applications.
+
+* User devices sends geolocation data to location-producer-ms - microservice that consumes gRPC messages and
+send them to Kafka queue.
+* gRPC used because this technique allows to pass strict structure of technical messages that is important
+for geolocation. User devices produce a lot of data and Kafka queue allows to save this data to the location database
+in sequence without failures because of data overflow.
+* Location-saver-ms - is a microservice that consumes Kafka queue by topic and saves geolocation data to database.
+* Location-ms get data from geolocation database by SQL and ORM and provide a RESTful API to allow other services use location data.
+* Person-ms - is a microservice that allows to communicate with person database with RESTful API.
+* Contact-ms consumes data from location-ms and person-ms to combine contacts and expose RESTful API.
+* Frontend communicates with REST API of contact-ms and person-ms.
+
+So all parts of the system are loosely coupled. Data are isolated from each other by microservices that are responsible
+for a separate part of the business process and dedicated databases.
