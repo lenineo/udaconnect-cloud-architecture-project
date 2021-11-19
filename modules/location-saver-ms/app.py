@@ -9,7 +9,8 @@ KAFKA_SERVER = os.environ["KAFKA_SERVER"]
 
 consumer = KafkaConsumer(KAFKA_TOPIC, bootstrap_servers=KAFKA_SERVER)
 
-for message in consumer:
-    request = message.value.decode('utf-8')
-    location = json.loads(request)
-    LocationService.create(location)
+while True:
+    for message in consumer:
+        request = message.value.decode('utf-8')
+        location = json.loads(request)
+        LocationService.create(location)

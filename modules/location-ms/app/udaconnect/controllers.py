@@ -16,8 +16,6 @@ DATE_FORMAT = "%Y-%m-%d"
 api = Namespace("UdaConnect", description="Location microservice - microservice to get geolocation data of UdaConnect project..")  # noqa
 
 
-# TODO: This needs better exception handling
-
 @api.route("/locations")
 class LocationPostResource(Resource):
     @accepts(schema=LocationSchema)

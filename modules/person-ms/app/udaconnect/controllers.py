@@ -15,9 +15,6 @@ DATE_FORMAT = "%Y-%m-%d"
 api = Namespace("UdaConnect", description="Microservice to get UdaConnect users inforamation.")  # noqa
 
 
-# TODO: This needs better exception handling
-
-
 @api.route("/persons")
 class PersonsResource(Resource):
     @accepts(schema=PersonSchema)
